@@ -7,6 +7,10 @@
                 <vue-form :data="form"
                     class="box">
                 </vue-form>
+
+                <addresses :id="owner.id"
+                    type="owner">
+                </addresses>
                 <contacts :id="owner.id"
                     type="owner">
                 </contacts>
@@ -28,10 +32,11 @@ import Documents from '../../../../components/enso/documents/Documents.vue';
 import Comments from '../../../../components/enso/comments/Comments.vue';
 import Contacts from '../../../../components/enso/contacts/Contacts.vue';
 import VueForm from '../../../../components/enso/vueforms/VueForm.vue';
+import Addresses from '../../../../components/enso/addresses/Addresses.vue';
 
 export default {
     components: {
-        Comments, Contacts, Documents, VueForm,
+        Comments, Contacts, Documents, VueForm, Addresses
     },
 
     data() {
@@ -39,6 +44,7 @@ export default {
             initialised: false,
             form: {},
             owner: {},
+            userForm: null
         };
     },
 

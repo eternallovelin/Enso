@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d9073f402a07fb50b5146e6b602a4061",
+    "content-hash": "b20f8be94a3cf73154856ce2d21e2ff9",
     "packages": [
         {
             "name": "box/spout",
@@ -1192,6 +1192,69 @@
                 "logging"
             ],
             "time": "2017-10-01T19:30:56+00:00"
+        },
+        {
+            "name": "laravel-enso/addressesmanager",
+            "version": "2.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-enso/AddressesManager.git",
+                "reference": "cf8b0c419c422f0df0051f49f7b1de1ba66a6f18"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-enso/AddressesManager/zipball/cf8b0c419c422f0df0051f49f7b1de1ba66a6f18",
+                "reference": "cf8b0c419c422f0df0051f49f7b1de1ba66a6f18",
+                "shasum": ""
+            },
+            "require": {
+                "laravel-enso/core": "2.1.*",
+                "laravel-enso/formbuilder": "2.1.*",
+                "laravel-enso/helpers": "1.5.*",
+                "laravel-enso/structuremanager": "2.1.*",
+                "laravel-enso/vuecomponents": "2.1.*",
+                "laravel/framework": "5.5.*",
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelEnso\\AddressesManager\\AddressesManagerServiceProvider"
+                    ],
+                    "aliases": []
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelEnso\\AddressesManager\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Adrian Ocneanu",
+                    "email": "aocneanu@gmail.com",
+                    "homepage": "https://laravel-enso.com",
+                    "role": "Developer"
+                },
+                {
+                    "name": "Mihai",
+                    "email": "mihai.ocneanu@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Addresses Manager for Laravel Enso",
+            "keywords": [
+                "addresses",
+                "enso",
+                "laravel-enso",
+                "manager"
+            ],
+            "time": "2017-12-15T08:57:23+00:00"
         },
         {
             "name": "laravel-enso/avatarmanager",
