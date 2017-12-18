@@ -10,6 +10,8 @@
 
                 <addresses :id="owner.id"
                     type="owner">
+
+
                 </addresses>
                 <contacts :id="owner.id"
                     type="owner">

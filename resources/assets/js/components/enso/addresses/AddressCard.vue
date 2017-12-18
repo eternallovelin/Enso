@@ -3,45 +3,49 @@
     <card
         footer
         :header="false"
-        :footer-items="3"
-        icon="fa fa-map">
+        :footer-items="3">
         <div class="media has-padding-medium">
-            <div class="media-content" :class="address.is_default ? 'is-success' : 'is-warning'">
+            <div class="media-content">
+
+                <span class="icon is-large is-pulled-right has-text-success">
+                    <i class="fa fa-2x fa-anchor" v-if="address.is_default" ></i>
+                </span>
+
                 <!--default slot content will be overwritten if anything is provided-->
                 <slot name="address-card-template" :address="address">
+                    <span v-if="address.street">{{ address.street }}</span>
+                    <span v-if="address.street_type">{{ address.street_type }}</span>
+                    <span v-if="address.number"><span class="address-label">{{__('Number')}}:</span> {{ address.number }}</span>
                     <br>
-                    <span v-if="address.street">{{__('street')}}: {{ address.street }}</span>
-                    <span v-if="address.number">{{__('number')}}: {{ address.number }}</span>
+                    <span v-if="address.building"><span class="address-label">{{__('Building')}}:</span> {{ address.building }}</span>
+                    <span v-if="address.entry"><span class="address-label">{{__('Entry')}}:</span> {{ address.entry }}</span>
+                    <span v-if="address.floor"><span class="address-label">{{__('Floor')}}:</span> {{ address.floor }}</span>
+                    <span v-if="address.apartment"><span class="address-label">{{__('Apartment')}}:</span> {{ address.apartment }}</span>
                     <br>
-
-                    <span v-if="address.building">{{__('building')}}: {{ address.building }}</span>
-                    <span v-if="address.entry">{{__('entry')}}: {{ address.entry }}</span>
-                    <span v-if="address.floor">{{__('floor')}}: {{ address.floor }}</span>
-                    <span v-if="address.apartment">{{__('apartment')}}: {{ address.apartment }}</span>
+                    <span v-if="address.sub_administrative_area"><span class="address-label">{{__('Sub Administrative Area')}}:</span> {{ address.sub_administrative_area }}</span>
+                    <span v-if="address.city"><span class="address-label">{{__('City')}}:</span> {{ address.city }}</span>
                     <br>
-                    <span v-if="address.sub_administrative_area">{{__('subAdministrativeArea')}}: {{ address.sub_administrative_area }}</span>
-                    <span v-if="address.city">{{__('city')}}: {{ address.city }}</span>
+                    <span v-if="address.postal_area"><span class="address-label">{{__('Postal Area')}}:</span> {{ address.postal_area }}</span>
+                    <span v-if="address.administrative_area"><span class="address-label">{{__('Administrative Area')}}:</span> {{ address.administrative_area }}</span>
                     <br>
-                    <span v-if="address.postal_area">{{__('postalArea')}}: {{ address.postal_area }}</span>
-                    <span v-if="address.administrative_area">{{__('administrativeArea')}}: {{ address.administrative_area }}</span>
+                    {{ address.country_name }}
                     <br>
-                    {{ address.country_name }} <br>
                     <i class="fa fa-sticky-note "></i> {{ address.obs }} <br>
                 </slot>
             </div>
         </div>
 
-        <a slot="footer-item-1" >
-            <i class="fa fa-pencil-square-o pull-left margin-left-md"
-               @click="handleEdit"></i>
+        <a slot="footer-item-1" @click="handleEdit">
+            {{__('edit')}}
         </a>
         <a slot="footer-item-2" >
-            <i class="fa fa-anchor"
-               @click="setDefault"></i>
+            <span class="icon">
+                <i class="fa fa-anchor"
+                   @click="setDefault"></i>
+            </span>
         </a>
-        <a slot="footer-item-3" >
-            <i class="fa fa-trash-o pull-right margin-right-md"
-               @click="showModal=true"></i>
+        <a slot="footer-item-3"  @click="showModal=true">
+            {{__('delete')}}
         </a>
 
         <modal :show="showModal"
@@ -85,7 +89,7 @@
         methods: {
 
             setDefault() {
-                axios.get('/addresses/setDefault/' + this.address.id).then(response => {
+                axios.get('/api/addresses/setDefault/' + this.address.id).then(response => {
                     this.$emit('default-set', response.data.message);
                 }).catch((error) => {
                     this.reportEnsoException(error);
@@ -104,6 +108,11 @@
 </script>
 
 <style>
+
+    .address-label {
+        color: #808080b5;
+    }
+
 
     address.contact-info {
         padding-left: 5px;

@@ -18,23 +18,26 @@
             </span>
         </a>
 
-        <div class="has-padding-medium contacts-wrapper">
+        <div class="has-padding-medium addresses-wrapper">
             <div class="columns is-multiline">
-                <address-card v-for="(address, index) in filteredAddresses"
-                    class="column is-half-tablet is-one-third-widescreen address-card"
-                    :address="address"
-                    @default-set="handleDefaultSet"
-                    @do-edit="handleEdit(address)"
-                    @do-delete="destroy"
-                    :index="index"
-                    :key="index">
+                <div class="column is-half-tablet is-one-third-widescreen " v-for="(address, index) in filteredAddresses">
+                    <address-card
+                                  :address="address"
+                                  @default-set="handleDefaultSet"
+                                  @do-edit="handleEdit(address)"
+                                  @do-delete="destroy"
+                                  :index="index"
+                                  :key="index">
 
+                        <!--card customization template passthrough-->
                         <template slot="address-card-template" :address="address">
                             <slot name="address-template" :address="address">
                             </slot>
                         </template>
 
-                </address-card>
+                    </address-card>
+                </div>
+
             </div>
         </div>
         <address-modal-form
@@ -49,7 +52,18 @@
             @delete="get();form=null"
             @store="get();form=null">
 
-
+                <!--form customization elements passthrough-->
+                <template
+                    v-for="element in form.fields"
+                    v-if="element.config.custom"
+                    :slot="element.column"
+                    slot-scope="props">
+                        <slot
+                                :name="props.element.column"
+                                :element="props.element"
+                                :errors="props.errors">
+                        </slot>
+                </template>
 
 
         </address-modal-form>
@@ -119,16 +133,16 @@
         methods: {
 
             getEditForm(address) {
-                axios.get('/api/addresses/getEditForm/' + address.id).then(response => {
+                axios.get('/api/addresses/' + address.id + '/edit').then(response => {
                     this.$emit('form-loaded', response.data);
-                    this.form = response.data;
+                    this.form = response.data.editForm;
                 }).catch( error => {
                     this.handleError(error);
                 });
             },
             getCreateForm() {
                 const params = {addressable_id: this.id, addressable_type: this.type};
-                axios.get('/api/addresses/getCreateForm', {params: params}).then(response => {
+                axios.get('/api/addresses/create', {params: params}).then(response => {
                     this.form = response.data.createForm;
                 }).catch( error => {
                     this.handleError(error);
@@ -162,7 +176,7 @@
             },
             destroy(payload) {
 
-                axios.delete('/addresses/' + payload.id).then(response => {
+                axios.delete('/api/addresses/' + payload.id).then(response => {
                     this.$parent.loading = false;
                     this.addresses.splice(payload.index,1);
                 }).catch(error => {
@@ -181,14 +195,9 @@
 
 <style>
 
-    .contacts-wrapper {
-        max-height: 415px;
+    .addresses-wrapper {
+        max-height: 315px;
         overflow-y: auto;
-    }
-
-    .address-card {
-        /*border: 1px solid #4a4a4a;*/
-        margin: 10px;
     }
 
 </style>
