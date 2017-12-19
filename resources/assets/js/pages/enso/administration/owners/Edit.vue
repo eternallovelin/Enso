@@ -8,11 +8,11 @@
                     class="box">
                 </vue-form>
 
-                <addresses :id="owner.id"
+                <ro-addresses :id="owner.id"
                     type="owner">
 
 
-                </addresses>
+                </ro-addresses>
                 <contacts :id="owner.id"
                     type="owner">
                 </contacts>
@@ -35,10 +35,11 @@ import Comments from '../../../../components/enso/comments/Comments.vue';
 import Contacts from '../../../../components/enso/contacts/Contacts.vue';
 import VueForm from '../../../../components/enso/vueforms/VueForm.vue';
 import Addresses from '../../../../components/enso/addresses/Addresses.vue';
+import RoAddresses from '../../../../components/enso/addresses/RoAddresses.vue';
 
 export default {
     components: {
-        Comments, Contacts, Documents, VueForm, Addresses
+        Comments, Contacts, Documents, VueForm, Addresses, RoAddresses
     },
 
     data() {

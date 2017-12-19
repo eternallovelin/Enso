@@ -2,11 +2,12 @@
 
 namespace App;
 
-use LaravelEnso\AddressesManager\app\Traits\Addressable;
+
 use LaravelEnso\CommentsManager\app\Traits\Commentable;
 use LaravelEnso\Contacts\app\Traits\Contactable;
 use LaravelEnso\Core\app\Models\Owner as Owners;
 use LaravelEnso\DocumentsManager\app\Traits\Documentable;
+use LaravelEnso\RoAddresses\app\Traits\Addressable;
 
 class Owner extends Owners
 {
