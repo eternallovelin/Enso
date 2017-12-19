@@ -2,7 +2,6 @@
 
 namespace App;
 
-
 use LaravelEnso\CommentsManager\app\Traits\Commentable;
 use LaravelEnso\Contacts\app\Traits\Contactable;
 use LaravelEnso\Core\app\Models\Owner as Owners;
